@@ -1,6 +1,21 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+import "@/styles/globals.css";
+
+import CurrencyProvider from "@/modules/coins/currentCurrency";
+
+const queryClient = new QueryClient();
+
+const App = ({ Component, pageProps }: AppProps) => (
+  <QueryClientProvider client={queryClient}>
+    <CurrencyProvider>
+      <Component {...pageProps} />
+    </CurrencyProvider>
+  </QueryClientProvider>
+);
+
+export default App;

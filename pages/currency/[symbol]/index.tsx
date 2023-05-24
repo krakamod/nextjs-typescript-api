@@ -1,16 +1,20 @@
+import { useRouter } from "next/router";
 import Head from "next/head";
-import Typography from '@/components/Typography';
-import MarketCards from "@/modules/coins/Cards";
-import MarketCard from "@/modules/coins/Card";
+import Typography from "@/components/Typography";
+import Details from "@/modules/coins/Details";
 import getCurrencyName from "@/modules/coins/utils/getCurrencyName";
-import useMarkets from "@/modules/coins/queries/useMarkets";
+import useMarket from "@/modules/coins/queries/useMarket";
 import { useCurrency } from "@/modules/coins/currentCurrency";
 
-const Home: React.FC = () => {
+const CurrencyPage: React.FC = () => {
+  const router = useRouter();
   const currency = useCurrency();
   
-  const { data: markets } = useMarkets({
+  const { data: market } = useMarket({
+    id: router.query.symbol as string,
     currency,
+  }, {
+    enabled: !!router.query.symbol,
   });
 
   return (
@@ -25,18 +29,15 @@ const Home: React.FC = () => {
               Market Pairs ({getCurrencyName(currency)})
             </Typography>
             <p className="text-xl text-center text-gray-600">
-              The following is a list of crypto currencies with information
+              The following is a crypto currency with information
               related to the {getCurrencyName(currency)} trading pair.
             </p>
           </div>
         </div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {markets && (
-            <MarketCards>
-              {markets.map((market) => (
-                <MarketCard key={market.id} market={market} />
-              ))}
-            </MarketCards>
+        <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-8">
+          {/* End hero unit */}
+          {market && (
+            <Details key={market.id} market={market} />
           )}
         </div>
       </main>
@@ -44,4 +45,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default CurrencyPage;
