@@ -1,4 +1,4 @@
-import { HttpInstance } from "@/service/HttpInstance";
+import { HttpInstance } from "@/http/HttpInstance";
 import { type Currency, type Market } from "../../Coin";
 import { 
   type MarketResponse,

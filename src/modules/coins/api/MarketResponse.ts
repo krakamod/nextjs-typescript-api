@@ -1,4 +1,4 @@
-import { Mapper } from "@/service/Mapper";
+import { Mapper } from "@/http/Mapper";
 import { Market, MarketFactory, Currency } from "../Coin";
 
 export interface FullMarketResponse {

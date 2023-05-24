@@ -1,4 +1,4 @@
-import { HttpInstance } from "@/service/HttpInstance";
+import { HttpInstance } from "@/http/HttpInstance";
 import { Market, Currency } from "../Coin";
 
 export interface IApi {

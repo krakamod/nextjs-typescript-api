@@ -1,4 +1,4 @@
-import http from "@/service/http";
+import http from "@/http/http";
 import Api from "./api";
 
 export default Api(http);
